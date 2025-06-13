@@ -202,74 +202,116 @@ body {
   font-weight: 900;
   margin-bottom: 2.5rem;
 }
-.social-showcase .social-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
+
+/*
+  IMPORTANT: Masonry.js requires .grid-item to use float: left for multi-column layout.
+  Do NOT set display: flex or display: grid on .grid or any parent container.
+  If you change SCSS, recompile to style.css and hard-refresh your browser.
+*/
+.grid {
+  background: #181818;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  /* Prevent accidental flex/grid on parent */
+  display: block !important;
 }
-.social-showcase .social-card {
+
+.grid:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.grid-sizer,
+.grid-item {
+  width: 25%;
+}
+
+.grid-item {
+  float: left !important;
+  margin-bottom: 32px;
   background: #111;
-  border-radius: 1.5rem;
   box-shadow: 0 4px 24px rgba(0, 255, 90, 0.1333333333);
+  border-radius: 1.5rem;
   padding: 1.5rem;
-  flex: 1 1 320px;
-  min-width: 280px;
-  max-width: 340px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.action-video,
+.video-placeholder {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 1rem;
+  background: #111;
+}
+
+.play-pause-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.play-pause-btn .play-icon {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 24px solid #00ff5a;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  margin-left: 10px;
+}
+.play-pause-btn .pause-icon {
+  display: none;
+  width: 24px;
+  height: 28px;
   position: relative;
 }
-.social-showcase .social-card img {
-  width: 100%;
-  border-radius: 1rem;
-}
-.social-showcase .social-card .social-label {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+.play-pause-btn .pause-icon span {
+  display: inline-block;
+  width: 8px;
+  height: 28px;
   background: #00ff5a;
-  color: #111;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-weight: 700;
-  font-size: 0.95rem;
+  margin-right: 4px;
 }
-.social-showcase .social-card p {
-  margin-top: 1rem;
-  font-size: 1rem;
+.play-pause-btn .pause-icon span:last-child {
+  margin-right: 0;
 }
-.social-showcase .social-card a {
-  color: #00ff5a;
-  text-decoration: underline;
+
+.grid-item:hover .play-pause-btn,
+.grid-item:focus-within .play-pause-btn {
+  opacity: 1;
 }
 
 @media (max-width: 900px) {
-  .product-section {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .site-header .container, .site-footer .container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .social-showcase .social-grid {
-    flex-direction: column;
-    gap: 2rem;
+  .grid-sizer,
+  .grid-item {
+    width: 50%;
   }
 }
 @media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .product-info h2 {
-    font-size: 1.5rem;
-  }
-  .product-section {
-    padding: 1rem;
-  }
-  .cta-section h2 {
-    font-size: 1.5rem;
-  }
-  .social-showcase h2 {
-    font-size: 1.25rem;
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
   }
 }/*# sourceMappingURL=style.css.map */

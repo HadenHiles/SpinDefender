@@ -16,5 +16,9 @@ add_action('after_setup_theme', 'spindefender_theme_setup');
 function spindefender_enqueue_scripts() {
     wp_enqueue_style('spindefender-style', get_stylesheet_uri());
     wp_enqueue_style('spindefender-inter', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap', false);
+    // Add Material Icons
+    wp_enqueue_style('material-icons', 'https://fonts.googleapis.com/icon?family=Material+Icons', false);
+    // Enqueue parallax and scroll animation JS
+    wp_enqueue_script('spindefender-parallax', get_template_directory_uri() . '/assets/js/parallax-animations.js', array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'spindefender_enqueue_scripts');

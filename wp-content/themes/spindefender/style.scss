@@ -10,6 +10,12 @@ $shadow-green: 0 4px 24px #00ff5a22;
 $shadow-green-strong: 0 8px 32px #00ff5a44;
 $font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 
+$material-dark: #23272e;
+$material-surface: #18191c;
+$material-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1.5px 6px rgba(0,0,0,0.25);
+$material-shadow-strong: 0 12px 48px rgba(0,0,0,0.65), 0 2px 8px rgba(0,0,0,0.35);
+$accent: #00ff5a;
+
 // Mixins
 @mixin card {
   background: $primary-black;
@@ -23,10 +29,23 @@ $font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   justify-content: center;
 }
 
+// Material card mixin
+@mixin material-card {
+  background: $material-surface;
+  border-radius: 1.5rem;
+  box-shadow: $material-shadow;
+  transition: box-shadow 0.3s, transform 0.3s;
+  will-change: box-shadow, transform;
+  &:hover, &:focus-within {
+    box-shadow: $material-shadow-strong;
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
 // Base
 body {
   font-family: $font-main;
-  background: $primary-black;
+  background: $material-dark;
   color: $white;
   margin: 0;
   padding: 0;
@@ -73,11 +92,12 @@ body {
 
 // Hero
 .hero {
-  background: #000;
+  background: linear-gradient(120deg, $material-dark 60%, $material-surface 100%);
   color: $white;
   text-align: center;
   padding: 5rem 2rem 3rem 2rem;
   position: relative;
+  overflow: hidden;
   h1 {
     font-size: 3rem;
     font-weight: 900;
@@ -99,6 +119,16 @@ body {
     border-radius: 2rem;
     box-shadow: $shadow-green-strong;
   }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, $accent33 0%, transparent 80%);
+    opacity: 0.18;
+    z-index: 0;
+  }
+  z-index: 1;
 }
 
 // CTA Button
@@ -222,71 +252,132 @@ body {
     font-weight: 900;
     margin-bottom: 2.5rem;
   }
-  .social-grid {
-    @include flex-center(2rem);
+}
+
+/*
+  IMPORTANT: Masonry.js requires .grid-item to use float: left for multi-column layout.
+  Do NOT set display: flex or display: grid on .grid or any parent container.
+  If you change SCSS, recompile to style.css and hard-refresh your browser.
+*/
+.grid {
+  background: $secondary-black;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  /* Prevent accidental flex/grid on parent */
+  display: block !important;
+}
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid-sizer,
+.grid-item {
+  width: 25%; // 4 columns on desktop
+}
+.grid-item {
+  float: left !important; // Prevent override by any other rule
+  margin-bottom: 32px;
+  background: $primary-black;
+  box-shadow: $shadow-green;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  @include material-card;
+}
+.action-video,
+.video-placeholder {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 1rem;
+  background: $primary-black;
+}
+.play-pause-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  z-index: 2;
+  cursor: pointer;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  .play-icon {
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 24px solid $primary-green;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    margin-left: 10px;
   }
-  .social-card {
-    @include card;
-    padding: 1.5rem;
-    flex: 1 1 320px;
-    min-width: 280px;
-    max-width: 340px;
+  .pause-icon {
+    display: none;
+    width: 24px;
+    height: 28px;
     position: relative;
-    img {
-      width: 100%;
-      border-radius: 1rem;
-    }
-    .social-label {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
+    span {
+      display: inline-block;
+      width: 8px;
+      height: 28px;
       background: $primary-green;
-      color: $primary-black;
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-weight: 700;
-      font-size: 0.95rem;
+      margin-right: 4px;
+      &:last-child { margin-right: 0; }
     }
-    p {
-      margin-top: 1rem;
-      font-size: 1rem;
-    }
-    a {
-      color: $primary-green;
-      text-decoration: underline;
-    }
+  }
+}
+.grid-item:hover .play-pause-btn,
+.grid-item:focus-within .play-pause-btn {
+  opacity: 1;
+}
+
+// Parallax backgrounds
+.parallax-bg {
+  position: relative;
+  z-index: 1;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 350px;
+  width: 100%;
+  filter: brightness(0.7);
+}
+
+// Scroll reveal animation
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  &.revealed {
+    opacity: 1;
+    transform: none;
   }
 }
 
-// Responsive
 @media (max-width: 900px) {
-  .product-section {
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .site-header .container, .site-footer .container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .social-showcase .social-grid {
-    flex-direction: column;
-    gap: 2rem;
+  .grid-sizer,
+  .grid-item {
+    width: 50%; // 2 columns on tablet
   }
 }
 @media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .product-info h2 {
-    font-size: 1.5rem;
-  }
-  .product-section {
-    padding: 1rem;
-  }
-  .cta-section h2 {
-    font-size: 1.5rem;
-  }
-  .social-showcase h2 {
-    font-size: 1.25rem;
+  .grid-sizer,
+  .grid-item {
+    width: 100%; // 1 column on mobile
   }
 }
