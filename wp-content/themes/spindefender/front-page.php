@@ -5,11 +5,16 @@ Description: A modern, product-focused landing page for Spin Defender.
 */
 get_header(); ?>
 <main id="main-content">
-    <section class="hero">
-        <h1>Spin Defender</h1>
-        <p>Train like the pros. The ultimate hockey skills trainer for fast hands, quick feet, and game-ready moves. <span style="color:#00ff5a; font-weight:700;">#PotentHockey</span></p>
-        <img class="hero-image" src="https://placehold.it/500x350/111/00ff5a?text=Spin+Defender+in+Action" alt="Spin Defender Product Hero">
-        <a href="#buy" class="cta-btn">Get Yours Now</a>
+    <section class="hero" style="position:relative;overflow:hidden;">
+        <video class="hero-bg-video" autoplay loop muted playsinline style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+            <source src="<?php echo get_template_directory_uri(); ?>/assets/temporary-header-video.mp4" type="video/mp4">
+        </video>
+        <div style="position:relative;z-index:1;">
+            <h1>Spin Defender</h1>
+            <p>Train like the pros. The ultimate hockey skills trainer for fast hands, quick feet, and game-ready moves. <span style="color:#00ff5a; font-weight:700;">#PotentHockey</span></p>
+            <img class="hero-image" src="https://placehold.it/500x350/111/00ff5a?text=Spin+Defender+in+Action" alt="Spin Defender Product Hero">
+            <a href="#buy" class="cta-btn">Get Yours Now</a>
+        </div>
     </section>
     <section class="product-section" id="product">
         <img class="product-image" src="https://placehold.it/400x400/000/00ff5a?text=Spin+Defender+Product" alt="Spin Defender Product">
@@ -48,36 +53,27 @@ get_header(); ?>
     <section class="social-showcase">
         <h2>Spin Defender in Action</h2>
         <div class="social-grid">
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=Facebook+Video" alt="Facebook Video">
-                <div class="social-label">Facebook</div>
-                <p>🔥 The Spin Defender is here to change the way you train. If you’ve been looking for a way to simulate real-game pressure, sharpen your reaction time, and improve your puck control—this is it.<br><br>With adjustable speed, automatic direction changes, and wireless control, the Spin Defender adapts to your pace and challenges your skills in every session. It’s not just training. It’s next-level preparation. 👉<br><br><a href="https://www.facebook.com/PotentHockeyTraining/posts/-the-spin-defender-is-here-to-change-the-way-you-trainif-youve-been-looking-for-/1104839908343901/">View Post</a></p>
-            </div>
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=Instagram+Post" alt="Instagram Post">
-                <div class="social-label">Instagram</div>
-                <p>See the Spin Defender in action and join the #PotentHockey movement.<br><br><a href="https://www.instagram.com/p/DJ5QHjlyLDW/">View Post</a></p>
-            </div>
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=Facebook+Video" alt="Facebook Video">
-                <div class="social-label">Facebook Video</div>
-                <p>Watch the Spin Defender in action and see why players are calling it a game changer.<br><br><a href="https://www.facebook.com/PotentHockeyTraining/videos/potent-spin-defender/576028688846163/">Watch Video</a></p>
-            </div>
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=Instagram+Reel" alt="Instagram Reel">
-                <div class="social-label">Instagram Reel</div>
-                <p>Dynamic drills and fast hands—see more on Instagram.<br><br><a href="https://www.instagram.com/reel/DKSI6iBJTue/">Watch Reel</a></p>
-            </div>
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=Instagram+Reel" alt="Instagram Reel">
-                <div class="social-label">Instagram Reel</div>
-                <p>More intense training moments from the Spin Defender community.<br><br><a href="https://www.instagram.com/reel/DJecQrKxplC/">Watch Reel</a></p>
-            </div>
-            <div class="social-card">
-                <img src="https://placehold.it/320x180/111/00ff5a?text=TikTok+Video" alt="TikTok Video">
-                <div class="social-label">TikTok</div>
-                <p>💥 Spin Defender: 5 Shots Challenge. See more on TikTok!<br><br><a href="https://www.tiktok.com/@potenthockeyus/video/7510360746300132651">Watch Video</a></p>
-            </div>
+            <?php
+            $video_files = [
+                'spin-defender-vid-1.mp4',
+                'spin-defender-vid-2.mp4',
+                'spin-defender-vid-3.mp4',
+                'spin-defender-vid-4.mp4'
+            ];
+            $theme_url = get_template_directory_uri();
+            foreach ($video_files as $idx => $video) {
+                $video_path = get_template_directory() . '/assets/' . $video;
+                $video_url = $theme_url . '/assets/' . $video;
+                echo '<div class="social-card">';
+                if (file_exists($video_path)) {
+                    echo '<video width="320" height="180" controls poster="https://placehold.it/320x180/111/00ff5a?text=Spin+Defender+Video"><source src="' . esc_url($video_url) . '" type="video/mp4">Your browser does not support the video tag.</video>';
+                } else {
+                    echo '<img src="https://placehold.it/320x180/111/00ff5a?text=No+Video+Available" alt="Placeholder Video">';
+                }
+                echo '<div class="social-label">Spin Defender Video ' . ($idx + 1) . '</div>';
+                echo '</div>';
+            }
+            ?>
         </div>
     </section>
     <section class="cta-section" id="buy">
