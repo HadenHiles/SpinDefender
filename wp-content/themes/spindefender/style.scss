@@ -1,26 +1,25 @@
 // style.scss for Spin Defender Theme
 // --------------------------------------------------
 // Variables
-$primary-green: #00ff5a;
-$primary-black: #111;
-$secondary-black: #181818;
-$white: #fff;
-$gray: #eee;
-$shadow-green: 0 4px 24px #00ff5a22;
-$shadow-green-strong: 0 8px 32px #00ff5a44;
-$font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+$white: #EEEEEE !default;
+$primary: #7BC74D; // main accent green
+$on-primary: #222831; // text/icon on primary
+$secondary: #393E46; // mid background
+$secondary-black: #222831;
+$on-secondary: #EEEEEE; // text/icon on secondary
+$surface: #222831; // main dark background
+$on-surface: #EEEEEE; // text/icon on surface
+$shadow-primary: 0 4px 24px #7BC74D33;
+$shadow-primary-strong: 0 8px 32px #7BC74D55;
 
-$material-dark: #23272e;
-$material-surface: #18191c;
-$material-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1.5px 6px rgba(0,0,0,0.25);
-$material-shadow-strong: 0 12px 48px rgba(0,0,0,0.65), 0 2px 8px rgba(0,0,0,0.35);
-$accent: #00ff5a;
+// Font
+$font-main: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 
 // Mixins
 @mixin card {
-  background: $primary-black;
+  background: $surface;
   border-radius: 1.5rem;
-  box-shadow: $shadow-green;
+  box-shadow: $shadow-primary;
 }
 @mixin flex-center($gap: 2rem) { 
   display: flex;
@@ -31,13 +30,13 @@ $accent: #00ff5a;
 
 // Material card mixin
 @mixin material-card {
-  background: $material-surface;
+  background: $secondary;
   border-radius: 1.5rem;
-  box-shadow: $material-shadow;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45), 0 1.5px 6px rgba(0,0,0,0.25);
   transition: box-shadow 0.3s, transform 0.3s;
   will-change: box-shadow, transform;
   &:hover, &:focus-within {
-    box-shadow: $material-shadow-strong;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.65), 0 2px 8px rgba(0,0,0,0.35);
     transform: translateY(-6px) scale(1.02);
   }
 }
@@ -45,16 +44,16 @@ $accent: #00ff5a;
 // Base
 body {
   font-family: $font-main;
-  background: $material-dark;
-  color: $white;
+  background: $surface;
+  color: $on-surface;
   margin: 0;
   padding: 0;
 }
 
 // Header & Footer
 .site-header, .site-footer {
-  background: $secondary-black;
-  color: $white;
+  background: $secondary;
+  color: $on-secondary;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   padding: 1.5rem 0;
 }
@@ -67,7 +66,7 @@ body {
   justify-content: space-between;
 }
 .site-title a {
-  color: $primary-green;
+  color: $primary;
   text-decoration: none;
   font-weight: 700;
   font-size: 2rem;
@@ -81,129 +80,143 @@ body {
   gap: 2rem;
 }
 .site-nav a {
-  color: $white;
+  color: $on-secondary;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
   &:hover {
-    color: $primary-green;
+    color: darken($primary, 10%);
   }
 }
 
-// Hero
+// Hero Section
 .hero {
-  background: linear-gradient(120deg, $material-dark 60%, $material-surface 100%);
-  color: $white;
-  text-align: center;
-  padding: 5rem 2rem 3rem 2rem;
+  background: $surface;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   position: relative;
-  overflow: hidden;
-  h1 {
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: -2px;
-    color: $primary-green;
-    text-shadow: 0 2px 16px #000;
-  }
-  p {
-    font-size: 1.5rem;
-    color: $white;
-    max-width: 600px;
-    margin: 1.5rem auto 2rem auto;
-  }
-  .hero-image {
-    max-width: 500px;
+  .hero-inner {
     width: 100%;
-    margin: 2rem auto 0 auto;
-    display: block;
-    border-radius: 2rem;
-    box-shadow: $shadow-green-strong;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 2rem;
   }
-  &::before {
-    content: '';
-    position: absolute;
-    top: -80px; left: -80px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, $accent33 0%, transparent 80%);
-    opacity: 0.18;
-    z-index: 0;
+  .hero-content {
+    flex: 1 1 400px;
+    min-width: 320px;
+    padding: 3rem 0;
+    h1 {
+      color: $primary;
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+    p {
+      color: $on-surface;
+      font-size: 1.35rem;
+      max-width: 500px;
+      margin-bottom: 2.2rem;
+      span {
+        color: $primary;
+        font-weight: 700;
+      }
+    }
   }
-  z-index: 1;
-}
-
-// CTA Button
-.cta-btn {
-  background: $primary-green;
-  color: $primary-black;
-  border: none;
-  border-radius: 2rem;
-  padding: 1rem 2.5rem;
-  font-size: 1.25rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 16px #00ff5a33;
-  margin-top: 1.5rem;
-  display: inline-block;
-  text-decoration: none;
-  transition: background 0.2s, box-shadow 0.2s;
-  &:hover {
-    background: darken($primary-green, 10%);
-    box-shadow: 0 8px 32px #00ff5a66;
+  .hero-image-wrap {
+    flex: 1 1 400px;
+    min-width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .hero-image {
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px #7BC74D55;
+      width: 100%;
+      max-width: 480px;
+    }
   }
 }
 
 // Product Section
 .product-section {
-  max-width: 1100px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: $secondary-black;
-  border-radius: 2rem;
-  box-shadow: $shadow-green;
-  @include flex-center(3rem);
-  align-items: center;
-  .product-image {
+  background: $secondary;
+  padding: 3.5rem 0 2.5rem 0;
+  .product-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+  }
+  .product-image-wrap {
     flex: 1 1 350px;
     min-width: 300px;
-    max-width: 400px;
-    border-radius: 1.5rem;
-    box-shadow: $shadow-green-strong;
+    .product-image {
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px #7BC74D55;
+      width: 100%;
+      max-width: 400px;
+    }
   }
   .product-info {
     flex: 2 1 400px;
+    min-width: 320px;
     h2 {
+      color: $on-secondary;
       font-size: 2.25rem;
       font-weight: 800;
-      color: $white;
       margin-bottom: 1rem;
     }
     p {
+      color: $on-secondary;
       font-size: 1.15rem;
-      color: $gray;
       margin-bottom: 1.5rem;
     }
     ul {
-      color: $primary-green;
+      color: $primary;
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
       padding-left: 1.2em;
+      list-style: disc;
     }
   }
 }
 
 // Testimonials
 .testimonials {
-  max-width: 1000px;
-  margin: 3rem auto;
+  background: $surface;
+  padding: 3rem 0;
+  .testimonials-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
   h3 {
-    color: $primary-green;
+    color: $primary;
     text-align: center;
     font-size: 2rem;
     font-weight: 800;
     margin-bottom: 2rem;
   }
+  .testimonials-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
   .testimonial {
-    @include card;
+    background: $secondary;
+    border-radius: 1.5rem;
+    box-shadow: 0 6px 24px #222831cc;
     padding: 2rem;
     flex: 1 1 300px;
     min-width: 260px;
@@ -214,10 +227,10 @@ body {
     }
     p {
       font-style: italic;
-      color: $white;
+      color: $on-surface;
     }
     span {
-      color: $primary-green;
+      color: $primary;
       font-weight: 700;
     }
   }
@@ -229,7 +242,7 @@ body {
   text-align: center;
   padding: 3rem 2rem;
   h2 {
-    color: $primary-green;
+    color: $primary;
     font-size: 2.5rem;
     font-weight: 900;
     margin-bottom: 1rem;
@@ -243,14 +256,96 @@ body {
 
 // Social Showcase
 .social-showcase {
-  background: $secondary-black;
-  padding: 4rem 2rem;
+  background: $secondary;
+  padding: 4rem 0;
+  
   h2 {
-    color: $primary-green;
+    color: $primary;
     text-align: center;
     font-size: 2.25rem;
     font-weight: 900;
     margin-bottom: 2.5rem;
+  }
+  .grid {
+    background: none;
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+  .grid-sizer,
+  .grid-item {
+    width: 25%; // 4 columns on desktop
+  }
+  .grid-item {
+    float: left;
+    width: 25%;
+    margin-bottom: 32px;
+    background: $surface;
+    box-shadow: $shadow-primary;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    display: block;
+  }
+  @media (max-width: 900px) {
+    .grid-sizer,
+    .grid-item {
+      width: 50%; // 2 columns on tablet
+    }
+  }
+  @media (max-width: 568px) {
+    .grid-sizer,
+    .grid-item {
+      width: 100%; // 1 column on mobile
+    }
+  }
+}
+
+// CTA Button
+.cta-btn {
+  background: $surface;
+  color: $primary;
+  border: 2px solid $primary;
+  border-radius: 2.5rem;
+  padding: 1.1rem 2.7rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 24px $on-primary, 0 2px 8px $primary;
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, border 0.2s, transform 0.15s;
+  &:hover, &:focus {
+    background: $primary;
+    color: $on-primary;
+    border-color: darken($primary, 10%);
+    box-shadow: 0 12px 32px $primary, 0 2px 8px $on-primary;
+    transform: translateY(-2px) scale(1.03);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 900px) {
+  .hero .hero-inner,
+  .product-section .product-inner {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 600px) {
+  .hero .hero-inner,
+  .product-section .product-inner {
+    padding: 0 1rem;
   }
 }
 
@@ -280,8 +375,8 @@ body {
 .grid-item {
   float: left !important; // Prevent override by any other rule
   margin-bottom: 32px;
-  background: $primary-black;
-  box-shadow: $shadow-green;
+  background: $surface;
+  box-shadow: $shadow-primary;
   border-radius: 1.5rem;
   padding: 1.5rem;
   position: relative;
@@ -297,7 +392,7 @@ body {
   height: auto;
   object-fit: contain;
   border-radius: 1rem;
-  background: $primary-black;
+  background: $surface;
 }
 .play-pause-btn {
   display: flex;
@@ -321,7 +416,7 @@ body {
     display: block;
     width: 0;
     height: 0;
-    border-left: 24px solid $primary-green;
+    border-left: 24px solid $primary;
     border-top: 14px solid transparent;
     border-bottom: 14px solid transparent;
     margin-left: 10px;
@@ -335,7 +430,7 @@ body {
       display: inline-block;
       width: 8px;
       height: 28px;
-      background: $primary-green;
+      background: $primary;
       margin-right: 4px;
       &:last-child { margin-right: 0; }
     }
@@ -366,18 +461,5 @@ body {
   &.revealed {
     opacity: 1;
     transform: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .grid-sizer,
-  .grid-item {
-    width: 50%; // 2 columns on tablet
-  }
-}
-@media (max-width: 600px) {
-  .grid-sizer,
-  .grid-item {
-    width: 100%; // 1 column on mobile
   }
 }
