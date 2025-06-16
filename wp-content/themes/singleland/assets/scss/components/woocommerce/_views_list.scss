@@ -1,0 +1,20 @@
+.theme-list-view-wrapper{
+    .add_to_wishlist{
+        margin-left: 12px !important;
+        border-radius: 0px !important;
+        background: #c1c1c13b !important;
+        color: #fff !important;
+        font-size: 16px !important;
+        display: inline-block;
+        text-align: center;
+        padding: 0px 16px;
+        i{
+            margin-left: 0px;
+            line-height: 22px;
+            background: transparent;
+            &::before{
+                color: var(--color-white) !important;
+            }
+        }
+    }
+}

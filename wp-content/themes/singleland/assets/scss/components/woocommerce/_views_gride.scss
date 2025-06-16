@@ -1,0 +1,37 @@
+.medical_featured_pr_item{
+    .featured_content_bottom{
+        .rating{
+            color: #ffdb35;
+            display: none;
+        }
+    }
+    .hover_item{
+        align-items: center;
+        .yith-wcwl-add-to-wishlist{
+           a{
+             height: 50px !important;
+             overflow: hidden;
+             text-indent: -170px;
+             background: #191919 !important;
+             &.add_to_wishlist.single_add_to_wishlist{
+              text-indent: 0px;
+             }
+           }
+        }
+        a{
+            i{
+                line-height: 30px !important;
+            }
+          &:hover{
+            background-color: var(--secondary-color) !important;
+          }
+        }
+    }
+}
+.medical_featured_pr_item_style3{
+  .hover_item{
+    a{
+      background: #191919 !important;
+    }
+  }
+}

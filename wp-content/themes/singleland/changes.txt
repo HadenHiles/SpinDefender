@@ -1,0 +1,44 @@
+----- 1.0.9 (03 Jun 2025) -----
+updated : Deprecated function updated
+update  : Singleland Theme css and js updated
+updated : Compatibility with latest WordPress
+
+----- 1.0.8 (25 Jan 2025) -----
+update  : singleland-core plugin updated  ( 1.0.4 )
+updated : Compatibility with latest WordPress
+
+----- 1.0.7 (12 Oct 2024) -----
+update  : Plugin install issue solved
+update  : Theme option updated
+updated : Compatibility with latest WordPress
+
+----- 1.0.6 (17 April 2024) -----
+update  : Plugin install issue solved
+updated : Compatibility with latest WordPress
+
+----- 1.0.5 (08 Jan 2024) -----
+update  : singleland-core plugin updated
+updated : Compatibility with latest WordPress
+
+----- 1.0.4 (01 Oct 2023) -----
+update  : Demo content updated
+update  : Theme option updated
+update  : TGM Plugin active function updated
+update  : singleland-core plugin updated  ( 1.0.3 )
+updated : Compatibility with latest WordPress
+
+
+
+----- 1.0.3 (03 June 2023) -----
+Added: Droit Dark Integration 
+updated : Singleland-core URL Updated
+Updated : One-click demo data updated
+updated : Deprecated function updated
+updated : compatibility with latest wordpress
+
+----- 1.0.1 (13  April 2023) -----
+Added: 05 New Home Page Added
+Added: All page Dark demo added
+
+----- 1.0.0 (10 April 2023) -----
+Initial release

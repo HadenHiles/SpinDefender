@@ -1,0 +1,19 @@
+.blog_breadcrumbs_area_two,
+.blog_breadcrumbs_area_two.page-banner,
+.blog_breadcrumbs_area_two.blog-single-page,
+.blog_breadcrumbs_area_two.archive-banner,
+.blog_breadcrumbs_area_two.banner-404{
+    padding: 135px 0px;
+    position: relative;
+    z-index: 1;
+}
+
+.parallaxie{
+    background-attachment:  fixed !important;
+}
+
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="search"], input[type="number"], input[type="tel"], input[type="range"], input[type="date"], input[type="month"], input[type="week"], input[type="time"], input[type="datetime"], input[type="datetime-local"], input[type="color"], textarea{
+    color: var(--body-color);
+    border: 1px solid rgba(25, 25, 25, 0.12);
+    border-radius: 0px;
+}
